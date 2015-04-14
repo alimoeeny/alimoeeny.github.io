@@ -19,23 +19,3 @@ Maybe it is specially hard, if you care about the technology that you use.
 
 Let's see if taking it a bit easier this time will help.
 Keeping my fingers crossed.
-
-
-Some header
-===========
-
-what is going on
-
-
-#what about this
-
-both works, wtf
-
-
-{% highlight css %}
-#container {
-    float: left;
-    margin: 0 -240px 0 0;
-    width: 100%;
-}
-{% endhighlight %}
