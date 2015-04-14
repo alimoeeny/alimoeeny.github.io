@@ -33,8 +33,12 @@
     {% include _author-bio.html %}
   </div>
   <div id="index">
-  {% if page.sticky.title %}
-  {{ page.sticky.html }}
+  {% if page.apps.title %}
+    {{ page.apps.html }}
+  {% endif %}
+
+  {% if page.books.title %}
+    {{ page.books.html }}
   {% endif %} 
 
     <h3><a href="{{ site.url}}/posts/">Recent Posts</a></h3>
