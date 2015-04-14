@@ -1,0 +1,60 @@
+# Site wide configuration
+
+title:            Ali Moeeny
+locale:           en_US
+url:              #http://ali.moeeny.com
+
+
+# Jekyll configuration
+
+permalink:   /:categories/:title/
+markdown:    kramdown
+highlighter: pygments
+sass:
+  sass_dir: _sass
+  style: compressed
+gems:
+  - jekyll-sitemap
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  use_coderay: false
+
+
+# Site owner
+owner:
+  name: Ali Moeeny MD PhD
+  avatar: ali-bio-photo.jpg
+  bio: "It has been a bit crazy so far. But I've been told only the first 100 years or so will be like that."
+  email: alimoeeny@gmail.com
+  disqus-shortname: alimoeeny 
+  twitter: alimoeeny
+  facebook: alimoeeny
+  google:
+    plus: alimoeeny
+    analytics: UA-2541934-1
+    verify: d6GHRUvsrXc4vtd7vdNHDBDvBzoim75jI6Z32-iWqpc
+    ad-client: 
+    ad-slot: 
+  bing-verify: 
+  github: alimoeeny
+  stackoverflow: http://stackoverflow.com/users/487855/ali
+  linkedin: alimoeeny
+  xing: #username
+  instagram: alimoeeny
+  lastfm: alimoeeny
+  tumblr: #username
+  pinterest: #username
+  foursquare: alimoeeny
+  steam: #username
+  dribbble: #username
+  youtube: alimoeeny
+  soundcloud: alimoeeny
+  weibo: #username
+  flickr: alimoeeny
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]
