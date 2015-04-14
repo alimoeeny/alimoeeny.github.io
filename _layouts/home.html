@@ -33,6 +33,10 @@
     {% include _author-bio.html %}
   </div>
   <div id="index">
+  {% if page.sticky.title %}
+  {{ page.sticky.html }}
+  {% endif %} 
+
     <h3><a href="{{ site.url}}/posts/">Recent Posts</a></h3>
     {% for post in site.posts limit:5 %}    
     <article>
