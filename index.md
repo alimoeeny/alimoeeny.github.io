@@ -1,7 +1,7 @@
 ---
 layout: home
-excerpt: "A minimal Jekyll theme for your blog by designer Michael Rose."
-tags: [Jekyll, theme, responsive, blog, template]
+excerpt: "Ali Moeeny's Personal Website"
+tags: [Ali Moeeny, علی معینی]
 image:
   feature: home-banner-1.jpg
   credit: Ali Moeeny
