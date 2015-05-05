@@ -4,7 +4,7 @@ title: "Keep Calm and Power Through the Awkwardness"
 modified:
 categories: posts
 excerpt: "Wallpaper: Keep Calm and Power Through The Awkwardness"
-tags: [wallpaper]
+tags: [ wallpaper ]
 image:
   feature:
 date: 2015-04-24T10:36:42-04:00

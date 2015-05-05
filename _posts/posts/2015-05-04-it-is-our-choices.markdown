@@ -4,7 +4,7 @@ title: "It Is Our Choices"
 modified:
 categories: posts
 excerpt:
-tags: [ macbook cover, Albus Dumbledore, ]
+tags: [ wallpaper, macbook cover, Albus Dumbledore, ]
 image:
   feature:
 date: 2015-05-04T14:36:41-04:00

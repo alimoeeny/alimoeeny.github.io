@@ -4,7 +4,7 @@ title: "Mobile Wallpaper"
 modified:
 categories: posts
 excerpt: "A photo I use as my mobile wallpaper"
-tags: [wallpaper iphone mobile]
+tags: [ wallpaper, iphone, mobile ]
 image:
   feature:
 date: 2015-04-29T14:59:44-04:00
