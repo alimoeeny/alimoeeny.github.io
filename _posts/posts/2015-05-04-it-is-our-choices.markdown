@@ -3,7 +3,7 @@ layout: post
 title: "It Is Our Choices"
 modified:
 categories: posts
-excerpt:
+excerpt: "It is our choices Harry, that show what we truly are"
 tags: [ wallpaper, macbook cover, Albus Dumbledore, ]
 image:
   feature:

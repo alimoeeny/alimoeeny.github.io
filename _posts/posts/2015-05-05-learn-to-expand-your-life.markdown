@@ -3,7 +3,7 @@ layout: post
 title: "Learn to Expand Your Life"
 modified:
 categories: posts
-excerpt:
+excerpt: "The more we keep our minds and bodies open to learning the more life slows down"
 tags: [ leaning, young, brain, life, Zenosyne, dictionary of obscure sorrows]
 image:
   feature:
@@ -19,7 +19,7 @@ If I am to speculate, I'd say it is because of the vibrancy of senses in childho
 It is because we are learning so much in childhood.
 When we are learning time slows down. At least it does for me.
 As we grow up, we shut down our learning channels. A large number of people almost stop learning altogether, they even resist learning new things.
-I think the more we keep ourselves in the learning mode, the more our lives slow down, the more we enjoy life. 
+I think the more we keep ourselves in the learning mode, the more our lives slow down, the more we enjoy life.
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/SNgyEmYyQF4" frameborder="0" allowfullscreen></iframe>
