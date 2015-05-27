@@ -3,7 +3,7 @@ layout: post
 title: "What Is It With Car Manufacturers?"
 modified:
 categories: posts
-excerpt: "I am not talking about car deals"
+excerpt: "I am not talking about car dealers"
 tags: []
 image:
   feature:
