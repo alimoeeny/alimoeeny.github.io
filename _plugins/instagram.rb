@@ -27,12 +27,7 @@ module Jekyll
 
     def render(context)      
       id = @markup.strip
-      puts "Ali:"
-      puts id
-      puts @access_token
       media = get_cached_media(id) || get_media(id)
-      puts "media: ---------------------------"
-      puts media
       gen_html_output JSON.parse(media)
     end
     
@@ -85,12 +80,7 @@ module Jekyll
     
     def get_media(id)
       client = Instagram.client() #:access_token => @access_token)
-      #puts "user:"
-      #puts client.user
-      puts "get the media"
       data = client.media_item(id).to_json
-      puts "data:"
-      puts data
       cache id, data unless @cache_disabled
       data
     end
