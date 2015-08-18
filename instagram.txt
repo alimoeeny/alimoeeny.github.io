@@ -1,0 +1,10 @@
+this is my user id : 2258617
+you get the photo id from the web page html
+and append it with my user id prefixed with _
+so photoid_userid
+
+alternatively, go to: http://api.instagram.com/publicapi/oembed/?url=http://instagram.com/p/fvdApvOIhB/ 
+and replace the last section of this url with the id of the post you can find in the web UI
+
+
+
