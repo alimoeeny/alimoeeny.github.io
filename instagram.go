@@ -100,26 +100,25 @@ func genHTML(item media_item) string {
 	link := item.ItemData.Link
 	src := item.ItemData.Images["standard_resolution"].Url
 	image_w := item.ItemData.Images["standard_resolution"].Width
-	//image_h := item.ItemData.Images["standard_resolution"].Height
+	image_h := item.ItemData.Images["standard_resolution"].Height
 	location := item.ItemData.Location
 	//filter := item.ItemData.Filter
 	caption := item.ItemData.Caption
 	// created         = Time.at(Integer(item.created_time"])).strftime("%I:%M%p %B %e, %Y")
 	title := caption.Text
 
-	output = fmt.Sprintf("<p><a href='%s'><img src='%s' alt='%s' /></a>", link, src, title)
+	output = fmt.Sprintf("<div class='instagramphoto'><a href='%s'><img src='%s' alt='%s' /></a></div>", link, src, title)
 
 	if location.Latitude != 0 {
-		output += fmt.Sprintf("<p><a href='http://maps.google.com?q=%f,%f'>", location.Latitude, location.Longitude)
-
+		output += fmt.Sprintf("<div class='googlemap' style='padding-top:10pt'><a href='http://maps.google.com?q=%f,%f'>", location.Latitude, location.Longitude)
 		output += "<img border='0' "
-		output += fmt.Sprintf("src='http://maps.googleapis.com/maps/api/staticmap?center=%f,%f&markers=%f,%f&zoom=14&size=%dx200&sensor=false' ", location.Latitude, location.Longitude, location.Latitude, location.Longitude, image_w)
+		output += fmt.Sprintf("src='http://maps.googleapis.com/maps/api/staticmap?center=%f,%f&markers=%f,%f&zoom=14&size=%dx%d&sensor=false' ", location.Latitude, location.Longitude, location.Latitude, location.Longitude, image_w, image_h)
 		output += "alt='#{loc_alt}' /></a>"
 	}
 	if location.Name != "" {
 		output += fmt.Sprintf("<br/>Taken at %s", location.Name)
 	}
-	output += "</p>"
+	output += "</div>"
 
 	return output
 }
