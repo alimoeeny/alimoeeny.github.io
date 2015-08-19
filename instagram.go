@@ -71,7 +71,7 @@ func callApi(id, access_token string) (media_item, error) {
 
 	client := &http.Client{}
 	url := BASE_URL + id + "?access_token=" + access_token
-	fmt.Println(url)
+	//fmt.Println(url)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return item, err
@@ -96,21 +96,18 @@ func callApi(id, access_token string) (media_item, error) {
 
 func genHTML(item media_item) string {
 	output := ""
-	id := item.ItemData.Id
+	//id := item.ItemData.Id
 	link := item.ItemData.Link
 	src := item.ItemData.Images["standard_resolution"].Url
 	image_w := item.ItemData.Images["standard_resolution"].Width
 	//image_h := item.ItemData.Images["standard_resolution"].Height
 	location := item.ItemData.Location
-	filter := item.ItemData.Filter
+	//filter := item.ItemData.Filter
 	caption := item.ItemData.Caption
 	// created         = Time.at(Integer(item.created_time"])).strftime("%I:%M%p %B %e, %Y")
 	title := caption.Text
 
 	output = fmt.Sprintf("<p><a href='%s'><img src='%s' alt='%s' /></a>", link, src, title)
-	if filter != "" {
-		output += fmt.Sprintf("<br/>Filtered with %s through <a href='http://instagram.com'>Instagram</a></p><!--more-->", filter)
-	}
 
 	if location.Latitude != 0 {
 		output += fmt.Sprintf("<p><a href='http://maps.google.com?q=%f,%f'>", location.Latitude, location.Longitude)
@@ -124,18 +121,38 @@ func genHTML(item media_item) string {
 	}
 	output += "</p>"
 
-	output += fmt.Sprintf("<p><a href='http://web.stagram.com/p/%s#photo%s'>Leave a comment</a></p>", id, id)
 	return output
 }
 
+//func genPost(title, html string) string {
+//	post := ""
+//	post += `---`
+//	post += `layout: post`
+//	post += `title:` + title
+//	post += `modified:`
+//	post += `categories: posts`
+//	post += `excerpt: Just an instagram post, a friend of mine drew this on our office wall.`
+//	post += `tags: [photo, instagram, DC, startup, culture]`
+//	post += `image:`
+//	post += `  feature:`
+//	post += `date: 2015-08-14T08:00:45-04:00`
+//	post += `---`
+//	post += html
+//
+//	return post
+//}
+
+// the idea here is to create the post the normal way then >> append the out put of this to the post
 func main() {
 	// parse the args and get the id
-	var itemid = flag.String("itemid", "1036147723200923772_2258617", "The media id you can get by adding user id to the image id or by calling this api: ")
+	// example item id "1036147723200923772_2258617"
+	var itemid = flag.String("itemid", "", "The media id you can get by adding user id to the image id or by calling this api: ")
+	//var title = flag.String("title", "", "the post title, it defaults to the caption of the instagram pic, if left empty")
 	flag.Parse()
 
 	// read access token from file
 	accessToken, err := getAccessTokenFromFile()
-	fmt.Printf("\n%#v\n", accessToken)
+	//fmt.Printf("\n%#v\n", accessToken)
 	if err != nil {
 		panic(err)
 	}
@@ -145,8 +162,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	//if *title == "" {
+	//	title = *item.ItemData.Caption.Text
+	//}
 
 	// write the info to out file or stdout
 	html := genHTML(item)
-	fmt.Printf("HTML: \n%s\n", html)
+	fmt.Println(html)
+	//	post := genPost(title, html)
+	//	fmt.Printf("Post: \n%s\n", post)
 }
