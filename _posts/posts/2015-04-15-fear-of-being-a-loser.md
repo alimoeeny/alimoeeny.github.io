@@ -3,7 +3,7 @@ layout: post
 title: "Fear of Being a Loser"
 modified:
 categories: posts
-excerpt: "or worse, fear of being perceived as a loser, even when you belive you are not"
+excerpt: "or worse, fear of being perceived as a loser, even when you believe you are not"
 tags: [personal]
 image:
   feature:
