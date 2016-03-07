@@ -1,0 +1,19 @@
+---
+layout: post
+title: "Zootopia"
+modified:
+categories: posts
+excerpt:
+tags: [movies]
+image:
+  feature:
+date: 2016-03-07T07:30:03-04:00
+---
+
+Last night Motahar and I watched [Zootopia](http://letterboxd.com/film/zootopia/).
+Hands down it was one of the best Disney movies in recent history. Although the story is not very strong, it is very well made.   
+Specially the music stands out. Shakira, who also voice acts a pop start character also sings a beautiful song through out and at the end of the movie. [Try Everything](https://open.spotify.com/track/4THhG6r7WNnh5j8AtiUiSI)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/X-NTFFTDrNs" frameborder="0" allowfullscreen></iframe>
+
+<iframe src="https://embed.spotify.com/?uri=spotify%3Atrack%3A4THhG6r7WNnh5j8AtiUiSI" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
