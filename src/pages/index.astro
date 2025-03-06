@@ -1,11 +1,532 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+	<div class="home-container">
+		<!-- Projects Section -->
+		<section class="section projects-section">
+			<h2>Projects</h2>
+			<div class="projects-grid">
+				<div class="project-card">
+					<div class="project-content">
+						<h3 class="project-title">StringBean Radio</h3>
+						<p class="project-description">
+							Follow your favorite people rather than podcasts. No matter if they host, or appear as guest.
+						</p>
+						<div class="project-links">
+							<a href="https://stringbeanradio.com" target="_blank" rel="noopener noreferrer" class="project-link">Visit Website →</a>
+						</div>
+					</div>
+					<div class="project-image logo-container">
+						<img src="/images/StringBeanLogo.png" alt="StringBean Radio Logo" class="logo-image" />
+					</div>
+				</div>
+				
+				<div class="project-card">
+					<div class="project-content">
+						<h3 class="project-title">Obsidian Dropbox Photo Grid</h3>
+						<p class="project-description">
+							An Obsidian plugin that creates a photo grid from Dropbox images, enhancing visual note-taking and organization.
+						</p>
+						<div class="project-links">
+							<a href="https://github.com/alimoeeny/obsidian-dropbox-photo-grid" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub →</a>
+						</div>
+					</div>
+					<div class="project-image grayscale">
+						<img src="https://source.unsplash.com/random/600x400?code" alt="Obsidian Dropbox Photo Grid" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Latest Photos Section -->
+		<section class="section">
+			<h2>Latest Photos</h2>
+			<div class="photos-grid">
+				<!-- Sample photos with grayscale filter -->
+				<div class="photo-card">
+					<div class="photo-container">
+						<img src="https://source.unsplash.com/random/600x400?nature" alt="Nature photograph" class="grayscale" />
+					</div>
+					<div class="photo-info">
+						<h3>Morning Light</h3>
+						<p class="photo-date">March 2, 2025</p>
+					</div>
+				</div>
+				<div class="photo-card">
+					<div class="photo-container">
+						<img src="https://source.unsplash.com/random/600x400?architecture" alt="Architecture photograph" class="grayscale" />
+					</div>
+					<div class="photo-info">
+						<h3>Urban Geometry</h3>
+						<p class="photo-date">February 28, 2025</p>
+					</div>
+				</div>
+				<div class="photo-card">
+					<div class="photo-container">
+						<img src="https://source.unsplash.com/random/600x400?portrait" alt="Portrait photograph" class="grayscale" />
+					</div>
+					<div class="photo-info">
+						<h3>Contemplation</h3>
+						<p class="photo-date">February 25, 2025</p>
+					</div>
+				</div>
+			</div>
+			<div class="view-all">
+				<a href="/photos" class="view-all-link">View all photos →</a>
+			</div>
+		</section>
+
+		<!-- Recent Posts Section -->
+		<section class="section">
+			<h2>Recent Posts</h2>
+			<div class="posts-list">
+				<article class="post-card">
+					<h3 class="post-title">The Importance of Minimalism in Design</h3>
+					<div class="post-meta">
+						<span class="post-date">March 4, 2025</span>
+						<span class="post-tag">Design</span>
+					</div>
+					<p class="post-excerpt">
+						Minimalism isn't just an aesthetic choice; it's a functional one. By removing unnecessary elements, we can create more focused and effective designs that communicate clearly...
+					</p>
+					<a href="/posts/minimalism-in-design" class="read-more">Read more →</a>
+				</article>
+				<article class="post-card">
+					<h3 class="post-title">Reflections on Medical Research</h3>
+					<div class="post-meta">
+						<span class="post-date">February 27, 2025</span>
+						<span class="post-tag">Medicine</span>
+						<span class="post-tag">Research</span>
+					</div>
+					<p class="post-excerpt">
+						The intersection of clinical practice and research offers unique insights into how we approach patient care. My recent work has focused on bridging this gap...
+					</p>
+					<a href="/posts/medical-research-reflections" class="read-more">Read more →</a>
+				</article>
+				<article class="post-card">
+					<h3 class="post-title">Photography as Meditation</h3>
+					<div class="post-meta">
+						<span class="post-date">February 20, 2025</span>
+						<span class="post-tag">Photography</span>
+						<span class="post-tag">Mindfulness</span>
+					</div>
+					<p class="post-excerpt">
+						The act of photography can be a form of mindfulness practice. When I'm behind the camera, I'm fully present in the moment, observing light, composition, and the subtle details...
+					</p>
+					<a href="/posts/photography-meditation" class="read-more">Read more →</a>
+				</article>
+			</div>
+			<div class="view-all">
+				<a href="/posts" class="view-all-link">View all posts →</a>
+			</div>
+		</section>
+
+		<!-- Letterboxd Section -->
+		<section class="section letterboxd-section">
+			<h2>Recently Watched</h2>
+			<p class="section-intro">Films I've recently watched and logged on Letterboxd.</p>
+			<div class="movies-grid">
+				<div class="movie-card">
+					<div class="movie-poster grayscale">
+						<img src="https://source.unsplash.com/random/300x450?movie" alt="Movie poster" />
+					</div>
+					<div class="movie-info">
+						<h3>The Grand Budapest Hotel</h3>
+						<p class="movie-director">Wes Anderson, 2014</p>
+						<div class="movie-rating">★★★★☆</div>
+					</div>
+				</div>
+				<div class="movie-card">
+					<div class="movie-poster grayscale">
+						<img src="https://source.unsplash.com/random/300x450?film" alt="Movie poster" />
+					</div>
+					<div class="movie-info">
+						<h3>Parasite</h3>
+						<p class="movie-director">Bong Joon-ho, 2019</p>
+						<div class="movie-rating">★★★★★</div>
+					</div>
+				</div>
+				<div class="movie-card">
+					<div class="movie-poster grayscale">
+						<img src="https://source.unsplash.com/random/300x450?cinema" alt="Movie poster" />
+					</div>
+					<div class="movie-info">
+						<h3>Portrait of a Lady on Fire</h3>
+						<p class="movie-director">Céline Sciamma, 2019</p>
+						<div class="movie-rating">★★★★★</div>
+					</div>
+				</div>
+			</div>
+			<div class="view-all">
+				<a href="https://letterboxd.com/moeeny/" target="_blank" rel="noopener noreferrer" class="view-all-link">View on Letterboxd →</a>
+			</div>
+		</section>
+	</div>
 </Layout>
+
+<style>
+	.home-container {
+		max-width: 1000px;
+		margin: 0 auto;
+		padding-right: 250px; /* Accounting for sidebar */
+	}
+
+	/* Section Styling */
+	.section {
+		margin-bottom: 4rem;
+	}
+
+	h2 {
+		font-size: 1.75rem;
+		margin-bottom: 1.5rem;
+		color: var(--color-dark);
+		position: relative;
+		display: inline-block;
+	}
+
+	h2::after {
+		content: '';
+		position: absolute;
+		bottom: -8px;
+		left: 0;
+		width: 40px;
+		height: 2px;
+		background-color: var(--color-medium-light);
+	}
+
+	.section-intro {
+		margin-bottom: 1.5rem;
+		color: var(--color-medium);
+	}
+
+	/* Projects Section */
+	.projects-section {
+		margin-top: 2rem;
+	}
+
+	.projects-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.project-card {
+		display: flex;
+		background-color: var(--card-background);
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.project-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.project-content {
+		flex: 1;
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.project-title {
+		font-size: 1.5rem;
+		margin: 0 0 1rem;
+		color: var(--color-dark);
+	}
+
+	.project-description {
+		color: var(--color-medium-dark);
+		margin-bottom: 1.5rem;
+		line-height: 1.6;
+		flex-grow: 1;
+	}
+
+	.project-links {
+		margin-top: auto;
+	}
+
+	.project-link {
+		display: inline-block;
+		color: var(--color-medium-dark);
+		text-decoration: none;
+		font-weight: 500;
+		transition: color 0.2s ease, transform 0.2s ease;
+	}
+
+	.project-link:hover {
+		color: var(--color-dark);
+		transform: translateX(3px);
+	}
+
+	.project-image {
+		flex: 1;
+		min-height: 250px;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: var(--color-white);
+	}
+
+	.logo-container {
+		padding: 2rem;
+		aspect-ratio: 1/1;
+		max-width: 300px;
+	}
+
+	.project-image img {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	
+	.logo-image {
+		position: relative !important;
+		max-width: 100%;
+		max-height: 100%;
+		width: auto !important;
+		height: auto !important;
+		object-fit: contain !important;
+	}
+
+	/* Photos Grid */
+	.photos-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 1.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.photo-card {
+		background-color: var(--card-background);
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.photo-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.photo-container {
+		overflow: hidden;
+		position: relative;
+		padding-top: 66.67%; /* 3:2 aspect ratio */
+	}
+
+	.photo-container img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.photo-card:hover .photo-container img {
+		transform: scale(1.05);
+	}
+
+	.grayscale {
+		filter: grayscale(100%);
+	}
+
+	.photo-info {
+		padding: 1rem;
+	}
+
+	.photo-info h3 {
+		margin: 0 0 0.5rem;
+		font-size: 1.1rem;
+		color: var(--color-dark);
+	}
+
+	.photo-date {
+		font-size: 0.85rem;
+		color: var(--color-medium);
+		margin: 0;
+	}
+
+	/* Posts List */
+	.posts-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.post-card {
+		background-color: var(--card-background);
+		border-radius: 8px;
+		padding: 1.5rem;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.post-card:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+	}
+
+	.post-title {
+		margin: 0 0 0.75rem;
+		font-size: 1.3rem;
+		color: var(--color-dark);
+	}
+
+	.post-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-bottom: 1rem;
+		font-size: 0.85rem;
+	}
+
+	.post-date {
+		color: var(--color-medium);
+	}
+
+	.post-tag {
+		background-color: var(--color-lighter);
+		color: var(--color-medium-dark);
+		padding: 0.25rem 0.5rem;
+		border-radius: 4px;
+	}
+
+	.post-excerpt {
+		color: var(--color-medium-dark);
+		margin-bottom: 1rem;
+		line-height: 1.6;
+	}
+
+	.read-more {
+		color: var(--color-medium-dark);
+		text-decoration: none;
+		font-size: 0.9rem;
+		font-weight: 500;
+		transition: color 0.2s ease;
+	}
+
+	.read-more:hover {
+		color: var(--color-dark);
+	}
+
+	/* Letterboxd Section */
+	.letterboxd-section {
+		margin-bottom: 2rem;
+	}
+
+	.movies-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: 1.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.movie-card {
+		background-color: var(--card-background);
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.movie-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.movie-poster {
+		overflow: hidden;
+		position: relative;
+		padding-top: 150%; /* 2:3 aspect ratio for movie posters */
+	}
+
+	.movie-poster img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.movie-info {
+		padding: 1rem;
+	}
+
+	.movie-info h3 {
+		margin: 0 0 0.5rem;
+		font-size: 1rem;
+		color: var(--color-dark);
+	}
+
+	.movie-director {
+		font-size: 0.85rem;
+		color: var(--color-medium);
+		margin: 0 0 0.5rem;
+	}
+
+	.movie-rating {
+		color: var(--color-medium-dark);
+		font-size: 0.9rem;
+	}
+
+	/* View All Links */
+	.view-all {
+		text-align: right;
+		margin-top: 1rem;
+	}
+
+	.view-all-link {
+		color: var(--color-medium-dark);
+		text-decoration: none;
+		font-size: 0.95rem;
+		font-weight: 500;
+		transition: color 0.2s ease, transform 0.2s ease;
+		display: inline-block;
+	}
+
+	.view-all-link:hover {
+		color: var(--color-dark);
+		transform: translateX(3px);
+	}
+
+	/* Responsive Adjustments */
+	@media (max-width: 1024px) {
+		.home-container {
+			padding-right: 0;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.project-card {
+			flex-direction: column;
+		}
+
+		.project-image {
+			min-height: 200px;
+			order: -1;
+		}
+
+		.photos-grid, .movies-grid {
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		}
+	}
+
+	@media (max-width: 480px) {
+		.photos-grid, .movies-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

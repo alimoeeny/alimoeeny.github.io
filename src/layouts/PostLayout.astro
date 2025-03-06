@@ -1,0 +1,201 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout>
+	<div class="post-container">
+		<article class="post-content">
+			<header class="post-header">
+				<h1>{frontmatter.title}</h1>
+				<div class="post-meta">
+					<time datetime={frontmatter.date}>{frontmatter.formattedDate}</time>
+					<div class="post-tags">
+						{frontmatter.tags.map((tag) => (
+							<span class="post-tag">{tag}</span>
+						))}
+					</div>
+				</div>
+			</header>
+			
+			<div class="post-body">
+				<slot />
+			</div>
+			
+			<footer class="post-footer">
+				<div class="post-navigation">
+					<a href="/posts" class="back-to-posts">← Back to all posts</a>
+				</div>
+			</footer>
+		</article>
+	</div>
+</Layout>
+
+<style>
+	.post-container {
+		max-width: 800px;
+		margin: 0 auto;
+		padding-right: 250px; /* Accounting for sidebar */
+	}
+
+	.post-content {
+		background-color: var(--card-background);
+		border-radius: 8px;
+		padding: 2.5rem;
+		box-shadow: var(--card-shadow);
+	}
+
+	.post-header {
+		margin-bottom: 2.5rem;
+		padding-bottom: 1.5rem;
+		border-bottom: 1px solid var(--color-lighter);
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		color: var(--color-dark);
+		line-height: 1.2;
+	}
+
+	.post-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		align-items: center;
+		font-size: 0.95rem;
+		color: var(--color-medium);
+	}
+
+	.post-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.post-tag {
+		background-color: var(--color-lighter);
+		color: var(--color-medium-dark);
+		padding: 0.25rem 0.5rem;
+		border-radius: 4px;
+		font-size: 0.85rem;
+	}
+
+	.post-body {
+		font-size: 1.1rem;
+		line-height: 1.8;
+		color: var(--color-medium-dark);
+	}
+
+	.post-body p {
+		margin-bottom: 1.5rem;
+	}
+
+	.post-body h2 {
+		font-size: 1.8rem;
+		margin: 2.5rem 0 1rem;
+		color: var(--color-dark);
+	}
+
+	.post-body h3 {
+		font-size: 1.4rem;
+		margin: 2rem 0 1rem;
+		color: var(--color-dark);
+	}
+
+	.post-body img {
+		max-width: 100%;
+		border-radius: 6px;
+		margin: 2rem 0;
+		filter: grayscale(100%);
+	}
+
+	.post-body a {
+		color: var(--color-medium-dark);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		transition: color 0.2s ease;
+	}
+
+	.post-body a:hover {
+		color: var(--color-dark);
+	}
+
+	.post-body blockquote {
+		border-left: 4px solid var(--color-medium-light);
+		padding-left: 1.5rem;
+		margin-left: 0;
+		margin-right: 0;
+		font-style: italic;
+		color: var(--color-medium);
+	}
+
+	.post-body code {
+		background-color: var(--color-lighter);
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+		font-size: 0.9em;
+		font-family: monospace;
+	}
+
+	.post-body pre {
+		background-color: var(--color-lighter);
+		padding: 1rem;
+		border-radius: 6px;
+		overflow-x: auto;
+		margin: 1.5rem 0;
+	}
+
+	.post-body pre code {
+		background-color: transparent;
+		padding: 0;
+	}
+
+	.post-footer {
+		margin-top: 3rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--color-lighter);
+	}
+
+	.post-navigation {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.back-to-posts {
+		color: var(--color-medium-dark);
+		text-decoration: none;
+		font-size: 1rem;
+		font-weight: 500;
+		transition: color 0.2s ease, transform 0.2s ease;
+		display: inline-block;
+	}
+
+	.back-to-posts:hover {
+		color: var(--color-dark);
+		transform: translateX(-3px);
+	}
+
+	/* Responsive Adjustments */
+	@media (max-width: 1024px) {
+		.post-container {
+			padding-right: 0;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.post-content {
+			padding: 1.5rem;
+		}
+
+		h1 {
+			font-size: 2rem;
+		}
+
+		.post-body {
+			font-size: 1rem;
+		}
+	}
+</style>
