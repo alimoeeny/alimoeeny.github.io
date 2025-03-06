@@ -1,0 +1,558 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getRecentPhotos } from '../data/photos.js';
+import { getRecentPosts } from '../data/posts.js';
+import { getRecentMovies } from '../data/letterboxd.js';
+
+const recentPhotos = getRecentPhotos(3);
+const recentPosts = getRecentPosts(3);
+const recentMovies = await getRecentMovies(3);
+---
+
+<Layout>
+	<div class="home-container">
+		<!-- Projects Section -->
+		<section class="section projects-section">
+			<h2>Projects</h2>
+			<div class="projects-grid">
+				<div class="project-card">
+					<div class="project-content">
+						<h3 class="project-title">StringBean Radio</h3>
+						<p class="project-description">
+							Follow your favorite people rather than podcasts. No matter if they host, or appear as guest.
+						</p>
+						<div class="project-links">
+							<a href="https://stringbeanradio.com" target="_blank" rel="noopener noreferrer" class="project-link">Visit Website →</a>
+						</div>
+					</div>
+					<div class="project-image logo-container">
+						<img src="/images/StringBeanLogo.png" alt="StringBean Radio Logo" class="logo-image" />
+					</div>
+				</div>
+				
+				<div class="project-card">
+					<div class="project-content">
+						<h3 class="project-title">Obsidian Dropbox Photo Grid</h3>
+						<p class="project-description">
+							An Obsidian plugin that creates a photo grid from Dropbox images, enhancing visual note-taking and organization.
+						</p>
+						<div class="project-links">
+							<a href="https://github.com/alimoeeny/obsidian-dropbox-photo-grid" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub →</a>
+						</div>
+					</div>
+					<div class="project-image grayscale">
+						<img src="/images/ObsidianDropboxPhotoGrid.png" alt="Obsidian Dropbox Photo Grid" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Latest Photos Section -->
+		<section class="section photos-section">
+			<div class="section-header">
+				<h2>Latest Photos</h2>
+				<a href="/photos" class="view-all">View All →</a>
+			</div>
+			<div class="photos-grid">
+				{recentPhotos.map((photo) => (
+					<div class="photo-card">
+						<div class="photo-container">
+							<img src={photo.image} alt={photo.alt} class="grayscale" />
+						</div>
+						<div class="photo-info">
+							<h3>{photo.title}</h3>
+							<p class="photo-date">{photo.date}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<!-- Recent Posts Section -->
+		{recentPosts.length > 0 && (
+			<section class="section posts-section">
+				<div class="section-header">
+					<h2>Recent Posts</h2>
+					<a href="/posts" class="view-all">View All →</a>
+				</div>
+				<div class="posts-list">
+					{recentPosts.map((post) => (
+						<div class="post-item">
+							<div class="post-meta">
+								<span class="post-date">{post.formattedDate}</span>
+							</div>
+							<h3 class="post-title">
+								<a href={`/posts/${post.slug}`}>{post.title}</a>
+							</h3>
+							<p class="post-excerpt">{post.excerpt}</p>
+							<div class="post-tags">
+								{post.tags.map((tag) => (
+									<span class="tag">{tag}</span>
+								))}
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+		)}
+
+		<!-- Letterboxd Section -->
+		<section class="section letterboxd-section">
+			<div class="section-header">
+				<h2>Recently Watched</h2>
+				<a href="https://letterboxd.com/alimoeeny/" target="_blank" rel="noopener noreferrer" class="view-all">View on Letterboxd →</a>
+			</div>
+			<div class="movies-grid">
+				{recentMovies.length > 0 ? (
+					recentMovies.map((movie) => (
+						<div class="movie-card">
+							<a href={movie.link} target="_blank" rel="noopener noreferrer" class="movie-link">
+								<div class="movie-poster grayscale">
+									{movie.imageUrl ? (
+										<img src={movie.imageUrl} alt={`Poster for ${movie.title}`} />
+									) : (
+										<div class="movie-poster-placeholder">
+											<span>{movie.title[0]}</span>
+										</div>
+									)}
+								</div>
+								<div class="movie-info">
+									<h3 class="movie-title">{movie.title}</h3>
+									{(movie.year || movie.director) && (
+										<p class="movie-meta">
+											{movie.year}{movie.director && `, ${movie.director}`}
+										</p>
+									)}
+									{movie.rating && <div class="movie-rating">{movie.rating}</div>}
+									<p class="movie-date">{movie.date}</p>
+								</div>
+							</a>
+						</div>
+					))
+				) : (
+					<div class="letterboxd-empty">
+						<a href="https://letterboxd.com/alimoeeny/" target="_blank" rel="noopener noreferrer" class="letterboxd-link">
+							<img src="https://a.ltrbxd.com/logos/letterboxd-logo-h-neg-rgb.svg" alt="Letterboxd" class="letterboxd-logo" />
+							<p>See my movie reviews and watchlist on Letterboxd</p>
+						</a>
+					</div>
+				)}
+			</div>
+		</section>
+	</div>
+</Layout>
+
+<style>
+	.home-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding-right: 250px; /* Accounting for sidebar */
+	}
+
+	/* Section Styles */
+	.section {
+		margin-bottom: 3rem;
+	}
+
+	.section-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1.5rem;
+	}
+
+	h2 {
+		font-size: 1.8rem;
+		font-weight: 700;
+		color: var(--color-dark);
+		margin: 0;
+	}
+
+	.view-all {
+		color: var(--color-medium-dark);
+		text-decoration: none;
+		font-size: 0.9rem;
+		transition: color 0.2s ease, transform 0.2s ease;
+	}
+
+	.view-all:hover {
+		color: var(--color-dark);
+		transform: translateX(3px);
+	}
+
+	/* Projects Section */
+	.projects-section {
+		margin-top: 2rem;
+	}
+
+	.projects-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.project-card {
+		display: flex;
+		background-color: var(--card-background);
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.project-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.project-content {
+		flex: 1;
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.project-title {
+		font-size: 1.5rem;
+		margin: 0 0 1rem;
+		color: var(--color-dark);
+	}
+
+	.project-description {
+		color: var(--color-medium-dark);
+		margin-bottom: 1.5rem;
+		line-height: 1.6;
+		flex-grow: 1;
+	}
+
+	.project-links {
+		margin-top: auto;
+	}
+
+	.project-link {
+		display: inline-block;
+		color: var(--color-medium-dark);
+		text-decoration: none;
+		font-weight: 500;
+		transition: color 0.2s ease, transform 0.2s ease;
+	}
+
+	.project-link:hover {
+		color: var(--color-dark);
+		transform: translateX(3px);
+	}
+
+	.project-image {
+		flex: 1;
+		min-height: 250px;
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: var(--color-white);
+	}
+
+	.logo-container {
+		padding: 2rem;
+		aspect-ratio: 1/1;
+		max-width: 300px;
+	}
+
+	.project-image img {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	
+	.logo-image {
+		position: relative !important;
+		max-width: 100%;
+		max-height: 100%;
+		width: auto !important;
+		height: auto !important;
+		object-fit: contain !important;
+	}
+
+	/* Photos Grid */
+	.photos-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+
+	.photo-card {
+		background-color: var(--card-background);
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.photo-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.photo-container {
+		overflow: hidden;
+		position: relative;
+		padding-top: 66.67%; /* 3:2 aspect ratio */
+	}
+
+	.photo-container img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.photo-card:hover .photo-container img {
+		transform: scale(1.05);
+	}
+
+	.grayscale {
+		filter: grayscale(100%);
+	}
+
+	.photo-info {
+		padding: 1rem;
+	}
+
+	.photo-info h3 {
+		margin: 0 0 0.5rem;
+		font-size: 1.1rem;
+		color: var(--color-dark);
+	}
+
+	.photo-date {
+		font-size: 0.85rem;
+		color: var(--color-medium);
+		margin: 0;
+	}
+
+	/* Posts List */
+	.posts-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.post-item {
+		background-color: var(--card-background);
+		border-radius: 8px;
+		padding: 1.5rem;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.post-item:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.post-meta {
+		margin-bottom: 0.5rem;
+	}
+
+	.post-date {
+		font-size: 0.85rem;
+		color: var(--color-medium);
+	}
+
+	.post-title {
+		margin: 0 0 0.75rem;
+		font-size: 1.3rem;
+	}
+
+	.post-title a {
+		color: var(--color-dark);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.post-title a:hover {
+		color: var(--color-medium-dark);
+	}
+
+	.post-excerpt {
+		color: var(--color-medium-dark);
+		margin-bottom: 1rem;
+		line-height: 1.6;
+	}
+
+	.post-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.tag {
+		background-color: var(--color-lighter);
+		color: var(--color-medium-dark);
+		font-size: 0.75rem;
+		padding: 0.25rem 0.75rem;
+		border-radius: 50px;
+	}
+
+	/* Letterboxd Section */
+	.movies-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+	}
+
+	.movie-card {
+		background-color: var(--card-background);
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.movie-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.movie-link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.movie-poster {
+		overflow: hidden;
+		position: relative;
+		padding-top: 150%; /* 2:3 aspect ratio for movie posters */
+	}
+
+	.movie-poster img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.movie-card:hover .movie-poster img {
+		transform: scale(1.05);
+	}
+
+	.movie-poster-placeholder {
+		background-color: var(--color-lighter);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+	}
+
+	.movie-poster-placeholder span {
+		font-size: 2rem;
+		color: var(--color-medium);
+	}
+
+	.movie-info {
+		padding: 1rem;
+	}
+
+	.movie-title {
+		margin: 0 0 0.5rem;
+		font-size: 1.1rem;
+		color: var(--color-dark);
+	}
+
+	.movie-meta {
+		font-size: 0.85rem;
+		color: var(--color-medium);
+		margin-bottom: 0.5rem;
+	}
+
+	.movie-rating {
+		font-size: 1.2rem;
+		color: var(--color-medium-dark);
+		margin-bottom: 0.5rem;
+	}
+
+	.movie-date {
+		font-size: 0.85rem;
+		color: var(--color-medium);
+		margin: 0;
+	}
+
+	.letterboxd-empty {
+		background-color: var(--card-background);
+		border-radius: 8px;
+		padding: 2rem;
+		box-shadow: var(--card-shadow);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.letterboxd-link {
+		color: var(--color-medium-dark);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.letterboxd-link:hover {
+		color: var(--color-dark);
+	}
+
+	.letterboxd-logo {
+		width: 100px;
+		height: auto;
+		margin-bottom: 1rem;
+	}
+
+	/* Responsive Adjustments */
+	@media (max-width: 1024px) {
+		.home-container {
+			padding-right: 0;
+		}
+	}
+
+	@media (max-width: 768px) {
+		h2 {
+			font-size: 1.5rem;
+		}
+
+		.photos-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.project-card {
+			flex-direction: column;
+		}
+
+		.project-image {
+			min-height: 200px;
+		}
+
+		.logo-container {
+			max-width: 100%;
+		}
+
+		.movies-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.photos-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.movies-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

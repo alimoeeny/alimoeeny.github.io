@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { posts } from '../data/posts.js';
+---
+
+<Layout>
+	<div class="posts-container">
+		<header class="page-header">
+			<h1>Blog</h1>
+			<p class="page-description">Thoughts on design, medicine, technology, and more.</p>
+		</header>
+
+		{posts.length > 0 ? (
+			<div class="posts-list">
+				{posts.map((post) => (
+					<div class="post-item">
+						<div class="post-meta">
+							<span class="post-date">{post.formattedDate}</span>
+						</div>
+						<h2 class="post-title">
+							<a href={`/posts/${post.slug}`}>{post.title}</a>
+						</h2>
+						<p class="post-excerpt">{post.excerpt}</p>
+						<div class="post-tags">
+							{post.tags.map((tag) => (
+								<span class="tag">{tag}</span>
+							))}
+						</div>
+					</div>
+				))}
+			</div>
+		) : (
+			<div class="empty-state">
+				<p>No posts available yet. Check back soon!</p>
+			</div>
+		)}
+	</div>
+</Layout>
+
+<style>
+	.posts-container {
+		max-width: 800px;
+		margin: 0 auto;
+		padding-right: 250px; /* Accounting for sidebar */
+	}
+
+	.page-header {
+		margin-bottom: 3rem;
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+		color: var(--color-dark);
+	}
+
+	.page-description {
+		font-size: 1.1rem;
+		color: var(--color-medium);
+		max-width: 600px;
+	}
+
+	.posts-list {
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+		margin-bottom: 3rem;
+	}
+
+	.post-item {
+		border-bottom: 1px solid var(--color-lighter);
+		padding-bottom: 2.5rem;
+	}
+
+	.post-item:last-child {
+		border-bottom: none;
+	}
+
+	.post-meta {
+		margin-bottom: 0.75rem;
+	}
+
+	.post-date {
+		font-size: 0.9rem;
+		color: var(--color-medium);
+	}
+
+	.post-title {
+		margin: 0 0 1rem;
+		font-size: 1.8rem;
+		line-height: 1.3;
+	}
+
+	.post-title a {
+		color: var(--color-dark);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.post-title a:hover {
+		color: var(--color-medium-dark);
+	}
+
+	.post-excerpt {
+		color: var(--color-medium-dark);
+		margin-bottom: 1.5rem;
+		line-height: 1.6;
+	}
+
+	.post-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.tag {
+		background-color: var(--color-lighter);
+		color: var(--color-medium-dark);
+		font-size: 0.75rem;
+		padding: 0.25rem 0.75rem;
+		border-radius: 50px;
+	}
+
+	.empty-state {
+		text-align: center;
+		padding: 3rem 0;
+		color: var(--color-medium);
+		font-style: italic;
+	}
+
+	/* Responsive Adjustments */
+	@media (max-width: 1024px) {
+		.posts-container {
+			padding-right: 0;
+		}
+	}
+
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 2rem;
+		}
+
+		.post-title {
+			font-size: 1.5rem;
+		}
+	}
+</style>

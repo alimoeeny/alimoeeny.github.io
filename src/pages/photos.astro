@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { photos } from '../data/photos.js';
+---
+
+<Layout>
+	<div class="photos-container">
+		<header class="page-header">
+			<h1>Photography</h1>
+			<p class="page-description">A collection of moments and thoughts captured in grayscale.</p>
+		</header>
+
+		<div class="photos-grid">
+			{photos.map((photo) => (
+				<div class="photo-card">
+					<div class="photo-container">
+						<img src={photo.image} alt={photo.alt} class="grayscale" />
+					</div>
+					<div class="photo-info">
+						<h3>{photo.title}</h3>
+						<p class="photo-date">{photo.date}</p>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.photos-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding-right: 250px; /* Accounting for sidebar */
+	}
+
+	.page-header {
+		margin-bottom: 3rem;
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+		color: var(--color-dark);
+	}
+
+	.page-description {
+		font-size: 1.1rem;
+		color: var(--color-medium);
+		max-width: 800px;
+	}
+
+	.photos-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: 1.5rem;
+		margin-bottom: 3rem;
+	}
+
+	.photo-card {
+		background-color: var(--card-background);
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.photo-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.photo-container {
+		overflow: hidden;
+		position: relative;
+		padding-top: 66.67%; /* 3:2 aspect ratio */
+	}
+
+	.photo-container img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.photo-card:hover .photo-container img {
+		transform: scale(1.05);
+	}
+
+	.grayscale {
+		filter: grayscale(100%);
+	}
+
+	.photo-info {
+		padding: 1rem;
+	}
+
+	.photo-info h3 {
+		margin: 0 0 0.5rem;
+		font-size: 1.1rem;
+		color: var(--color-dark);
+	}
+
+	.photo-date {
+		font-size: 0.85rem;
+		color: var(--color-medium);
+		margin: 0;
+	}
+
+	/* Responsive Adjustments */
+	@media (max-width: 1024px) {
+		.photos-container {
+			padding-right: 0;
+		}
+	}
+
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 2rem;
+		}
+
+		.photos-grid {
+			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		}
+	}
+
+	@media (max-width: 480px) {
+		.photos-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
