@@ -1,120 +1,45 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { posts } from '../data/posts.js';
 ---
 
 <Layout>
-	<div class="posts-page-container">
-		<section class="page-header">
-			<h1>Posts</h1>
-			<p class="subtitle">Thoughts, research, and reflections</p>
-		</section>
+	<div class="posts-container">
+		<header class="page-header">
+			<h1>Blog</h1>
+			<p class="page-description">Thoughts on design, medicine, technology, and more.</p>
+		</header>
 
-		<section class="posts-section">
+		{posts.length > 0 ? (
 			<div class="posts-list">
-				<!-- Post 1 -->
-				<article class="post-card">
-					<h2 class="post-title">The Importance of Minimalism in Design</h2>
-					<div class="post-meta">
-						<span class="post-date">March 4, 2025</span>
-						<span class="post-tag">Design</span>
+				{posts.map((post) => (
+					<div class="post-item">
+						<div class="post-meta">
+							<span class="post-date">{post.formattedDate}</span>
+						</div>
+						<h2 class="post-title">
+							<a href={`/posts/${post.slug}`}>{post.title}</a>
+						</h2>
+						<p class="post-excerpt">{post.excerpt}</p>
+						<div class="post-tags">
+							{post.tags.map((tag) => (
+								<span class="tag">{tag}</span>
+							))}
+						</div>
 					</div>
-					<p class="post-excerpt">
-						Minimalism isn't just an aesthetic choice; it's a functional one. By removing unnecessary elements, we can create more focused and effective designs that communicate clearly and directly with users. In this post, I explore how minimalism can enhance user experience and improve overall design effectiveness.
-					</p>
-					<a href="/posts/minimalism-in-design" class="read-more">Read more →</a>
-				</article>
-
-				<!-- Post 2 -->
-				<article class="post-card">
-					<h2 class="post-title">Reflections on Medical Research</h2>
-					<div class="post-meta">
-						<span class="post-date">February 27, 2025</span>
-						<span class="post-tag">Medicine</span>
-						<span class="post-tag">Research</span>
-					</div>
-					<p class="post-excerpt">
-						The intersection of clinical practice and research offers unique insights into how we approach patient care. My recent work has focused on bridging this gap, exploring how research findings can be more effectively translated into practical applications in healthcare settings. This post discusses some of the challenges and opportunities in this area.
-					</p>
-					<a href="/posts/medical-research-reflections" class="read-more">Read more →</a>
-				</article>
-
-				<!-- Post 3 -->
-				<article class="post-card">
-					<h2 class="post-title">Photography as Meditation</h2>
-					<div class="post-meta">
-						<span class="post-date">February 20, 2025</span>
-						<span class="post-tag">Photography</span>
-						<span class="post-tag">Mindfulness</span>
-					</div>
-					<p class="post-excerpt">
-						The act of photography can be a form of mindfulness practice. When I'm behind the camera, I'm fully present in the moment, observing light, composition, and the subtle details that might otherwise go unnoticed. This post explores how photography has become a meditative practice for me and how it might serve as a mindfulness tool for others.
-					</p>
-					<a href="/posts/photography-meditation" class="read-more">Read more →</a>
-				</article>
-
-				<!-- Post 4 -->
-				<article class="post-card">
-					<h2 class="post-title">The Value of Interdisciplinary Approaches</h2>
-					<div class="post-meta">
-						<span class="post-date">February 15, 2025</span>
-						<span class="post-tag">Research</span>
-						<span class="post-tag">Education</span>
-					</div>
-					<p class="post-excerpt">
-						Breaking down silos between disciplines can lead to innovative solutions and deeper understanding. In this post, I reflect on my experiences working across medical science, technology, and design, and how this interdisciplinary approach has enriched my perspective and work outcomes.
-					</p>
-					<a href="/posts/interdisciplinary-approaches" class="read-more">Read more →</a>
-				</article>
-
-				<!-- Post 5 -->
-				<article class="post-card">
-					<h2 class="post-title">Film Photography in a Digital Age</h2>
-					<div class="post-meta">
-						<span class="post-date">February 5, 2025</span>
-						<span class="post-tag">Photography</span>
-						<span class="post-tag">Technology</span>
-					</div>
-					<p class="post-excerpt">
-						Despite the convenience and immediacy of digital photography, film continues to hold a special place in the hearts of many photographers, including myself. This post examines the unique qualities of film photography, the deliberate process it demands, and why it remains relevant in our fast-paced digital world.
-					</p>
-					<a href="/posts/film-photography" class="read-more">Read more →</a>
-				</article>
-
-				<!-- Post 6 -->
-				<article class="post-card">
-					<h2 class="post-title">Patient-Centered Healthcare Design</h2>
-					<div class="post-meta">
-						<span class="post-date">January 25, 2025</span>
-						<span class="post-tag">Medicine</span>
-						<span class="post-tag">Design</span>
-					</div>
-					<p class="post-excerpt">
-						How can we design healthcare systems and environments that truly center the patient experience? This post explores principles of human-centered design as applied to healthcare settings, drawing on both research evidence and practical experience to suggest approaches that can improve outcomes and experiences for patients.
-					</p>
-					<a href="/posts/patient-centered-design" class="read-more">Read more →</a>
-				</article>
-
-				<!-- Post 7 -->
-				<article class="post-card">
-					<h2 class="post-title">The Art of Black and White Photography</h2>
-					<div class="post-meta">
-						<span class="post-date">January 15, 2025</span>
-						<span class="post-tag">Photography</span>
-						<span class="post-tag">Art</span>
-					</div>
-					<p class="post-excerpt">
-						Removing color from an image forces us to see differently - to focus on composition, contrast, texture, and form. This post delves into the aesthetic and technical considerations of black and white photography, exploring how this medium can reveal aspects of our subjects that might be overlooked in color.
-					</p>
-					<a href="/posts/black-white-photography" class="read-more">Read more →</a>
-				</article>
+				))}
 			</div>
-		</section>
+		) : (
+			<div class="empty-state">
+				<p>No posts available yet. Check back soon!</p>
+			</div>
+		)}
 	</div>
 </Layout>
 
 <style>
-	.posts-page-container {
-		max-width: 900px;
+	.posts-container {
+		max-width: 800px;
 		margin: 0 auto;
 		padding-right: 250px; /* Accounting for sidebar */
 	}
@@ -130,59 +55,51 @@ import Layout from '../layouts/Layout.astro';
 		color: var(--color-dark);
 	}
 
-	.subtitle {
-		font-size: 1.25rem;
+	.page-description {
+		font-size: 1.1rem;
 		color: var(--color-medium);
-		margin-bottom: 1.5rem;
-		max-width: 800px;
-	}
-
-	.posts-section {
-		margin-bottom: 4rem;
+		max-width: 600px;
 	}
 
 	.posts-list {
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
+		gap: 2.5rem;
+		margin-bottom: 3rem;
 	}
 
-	.post-card {
-		background-color: var(--card-background);
-		border-radius: 8px;
-		padding: 2rem;
-		box-shadow: var(--card-shadow);
-		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	.post-item {
+		border-bottom: 1px solid var(--color-lighter);
+		padding-bottom: 2.5rem;
 	}
 
-	.post-card:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-	}
-
-	.post-title {
-		margin: 0 0 0.75rem;
-		font-size: 1.5rem;
-		color: var(--color-dark);
+	.post-item:last-child {
+		border-bottom: none;
 	}
 
 	.post-meta {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-		margin-bottom: 1rem;
-		font-size: 0.9rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.post-date {
+		font-size: 0.9rem;
 		color: var(--color-medium);
 	}
 
-	.post-tag {
-		background-color: var(--color-lighter);
+	.post-title {
+		margin: 0 0 1rem;
+		font-size: 1.8rem;
+		line-height: 1.3;
+	}
+
+	.post-title a {
+		color: var(--color-dark);
+		text-decoration: none;
+		transition: color 0.2s ease;
+	}
+
+	.post-title a:hover {
 		color: var(--color-medium-dark);
-		padding: 0.25rem 0.5rem;
-		border-radius: 4px;
 	}
 
 	.post-excerpt {
@@ -191,23 +108,30 @@ import Layout from '../layouts/Layout.astro';
 		line-height: 1.6;
 	}
 
-	.read-more {
-		color: var(--color-medium-dark);
-		text-decoration: none;
-		font-size: 0.95rem;
-		font-weight: 500;
-		transition: color 0.2s ease, transform 0.2s ease;
-		display: inline-block;
+	.post-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
 	}
 
-	.read-more:hover {
-		color: var(--color-dark);
-		transform: translateX(3px);
+	.tag {
+		background-color: var(--color-lighter);
+		color: var(--color-medium-dark);
+		font-size: 0.75rem;
+		padding: 0.25rem 0.75rem;
+		border-radius: 50px;
+	}
+
+	.empty-state {
+		text-align: center;
+		padding: 3rem 0;
+		color: var(--color-medium);
+		font-style: italic;
 	}
 
 	/* Responsive Adjustments */
 	@media (max-width: 1024px) {
-		.posts-page-container {
+		.posts-container {
 			padding-right: 0;
 		}
 	}
@@ -217,12 +141,8 @@ import Layout from '../layouts/Layout.astro';
 			font-size: 2rem;
 		}
 
-		.subtitle {
-			font-size: 1.1rem;
-		}
-
-		.post-card {
-			padding: 1.5rem;
+		.post-title {
+			font-size: 1.5rem;
 		}
 	}
 </style>

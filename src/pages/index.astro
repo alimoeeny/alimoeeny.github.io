@@ -1,8 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getRecentPhotos } from '../data/photos.js';
+import { getRecentPosts } from '../data/posts.js';
+import { getRecentMovies } from '../data/letterboxd.js';
 
 const recentPhotos = getRecentPhotos(3);
+const recentPosts = getRecentPosts(3);
+const recentMovies = await getRecentMovies(3);
 ---
 
 <Layout>
@@ -44,8 +48,11 @@ const recentPhotos = getRecentPhotos(3);
 		</section>
 
 		<!-- Latest Photos Section -->
-		<section class="section">
-			<h2>Latest Photos</h2>
+		<section class="section photos-section">
+			<div class="section-header">
+				<h2>Latest Photos</h2>
+				<a href="/photos" class="view-all">View All →</a>
+			</div>
 			<div class="photos-grid">
 				{recentPhotos.map((photo) => (
 					<div class="photo-card">
@@ -59,94 +66,77 @@ const recentPhotos = getRecentPhotos(3);
 					</div>
 				))}
 			</div>
-			<div class="view-all">
-				<a href="/photos" class="view-all-link">View all photos →</a>
-			</div>
 		</section>
 
 		<!-- Recent Posts Section -->
-		<section class="section">
-			<h2>Recent Posts</h2>
-			<div class="posts-list">
-				<article class="post-card">
-					<h3 class="post-title">The Importance of Minimalism in Design</h3>
-					<div class="post-meta">
-						<span class="post-date">March 4, 2025</span>
-						<span class="post-tag">Design</span>
-					</div>
-					<p class="post-excerpt">
-						Minimalism isn't just an aesthetic choice; it's a functional one. By removing unnecessary elements, we can create more focused and effective designs that communicate clearly...
-					</p>
-					<a href="/posts/minimalism-in-design" class="read-more">Read more →</a>
-				</article>
-				<article class="post-card">
-					<h3 class="post-title">Reflections on Medical Research</h3>
-					<div class="post-meta">
-						<span class="post-date">February 27, 2025</span>
-						<span class="post-tag">Medicine</span>
-						<span class="post-tag">Research</span>
-					</div>
-					<p class="post-excerpt">
-						The intersection of clinical practice and research offers unique insights into how we approach patient care. My recent work has focused on bridging this gap...
-					</p>
-					<a href="/posts/medical-research-reflections" class="read-more">Read more →</a>
-				</article>
-				<article class="post-card">
-					<h3 class="post-title">Photography as Meditation</h3>
-					<div class="post-meta">
-						<span class="post-date">February 20, 2025</span>
-						<span class="post-tag">Photography</span>
-						<span class="post-tag">Mindfulness</span>
-					</div>
-					<p class="post-excerpt">
-						The act of photography can be a form of mindfulness practice. When I'm behind the camera, I'm fully present in the moment, observing light, composition, and the subtle details...
-					</p>
-					<a href="/posts/photography-meditation" class="read-more">Read more →</a>
-				</article>
-			</div>
-			<div class="view-all">
-				<a href="/posts" class="view-all-link">View all posts →</a>
-			</div>
-		</section>
+		{recentPosts.length > 0 && (
+			<section class="section posts-section">
+				<div class="section-header">
+					<h2>Recent Posts</h2>
+					<a href="/posts" class="view-all">View All →</a>
+				</div>
+				<div class="posts-list">
+					{recentPosts.map((post) => (
+						<div class="post-item">
+							<div class="post-meta">
+								<span class="post-date">{post.formattedDate}</span>
+							</div>
+							<h3 class="post-title">
+								<a href={`/posts/${post.slug}`}>{post.title}</a>
+							</h3>
+							<p class="post-excerpt">{post.excerpt}</p>
+							<div class="post-tags">
+								{post.tags.map((tag) => (
+									<span class="tag">{tag}</span>
+								))}
+							</div>
+						</div>
+					))}
+				</div>
+			</section>
+		)}
 
 		<!-- Letterboxd Section -->
 		<section class="section letterboxd-section">
-			<h2>Recently Watched</h2>
-			<p class="section-intro">Films I've recently watched and logged on Letterboxd.</p>
-			<div class="movies-grid">
-				<div class="movie-card">
-					<div class="movie-poster grayscale">
-						<img src="https://source.unsplash.com/random/300x450?movie" alt="Movie poster" />
-					</div>
-					<div class="movie-info">
-						<h3>The Grand Budapest Hotel</h3>
-						<p class="movie-director">Wes Anderson, 2014</p>
-						<div class="movie-rating">★★★★☆</div>
-					</div>
-				</div>
-				<div class="movie-card">
-					<div class="movie-poster grayscale">
-						<img src="https://source.unsplash.com/random/300x450?film" alt="Movie poster" />
-					</div>
-					<div class="movie-info">
-						<h3>Parasite</h3>
-						<p class="movie-director">Bong Joon-ho, 2019</p>
-						<div class="movie-rating">★★★★★</div>
-					</div>
-				</div>
-				<div class="movie-card">
-					<div class="movie-poster grayscale">
-						<img src="https://source.unsplash.com/random/300x450?cinema" alt="Movie poster" />
-					</div>
-					<div class="movie-info">
-						<h3>Portrait of a Lady on Fire</h3>
-						<p class="movie-director">Céline Sciamma, 2019</p>
-						<div class="movie-rating">★★★★★</div>
-					</div>
-				</div>
+			<div class="section-header">
+				<h2>Recently Watched</h2>
+				<a href="https://letterboxd.com/alimoeeny/" target="_blank" rel="noopener noreferrer" class="view-all">View on Letterboxd →</a>
 			</div>
-			<div class="view-all">
-				<a href="https://letterboxd.com/moeeny/" target="_blank" rel="noopener noreferrer" class="view-all-link">View on Letterboxd →</a>
+			<div class="movies-grid">
+				{recentMovies.length > 0 ? (
+					recentMovies.map((movie) => (
+						<div class="movie-card">
+							<a href={movie.link} target="_blank" rel="noopener noreferrer" class="movie-link">
+								<div class="movie-poster grayscale">
+									{movie.imageUrl ? (
+										<img src={movie.imageUrl} alt={`Poster for ${movie.title}`} />
+									) : (
+										<div class="movie-poster-placeholder">
+											<span>{movie.title[0]}</span>
+										</div>
+									)}
+								</div>
+								<div class="movie-info">
+									<h3 class="movie-title">{movie.title}</h3>
+									{(movie.year || movie.director) && (
+										<p class="movie-meta">
+											{movie.year}{movie.director && `, ${movie.director}`}
+										</p>
+									)}
+									{movie.rating && <div class="movie-rating">{movie.rating}</div>}
+									<p class="movie-date">{movie.date}</p>
+								</div>
+							</a>
+						</div>
+					))
+				) : (
+					<div class="letterboxd-empty">
+						<a href="https://letterboxd.com/alimoeeny/" target="_blank" rel="noopener noreferrer" class="letterboxd-link">
+							<img src="https://a.ltrbxd.com/logos/letterboxd-logo-h-neg-rgb.svg" alt="Letterboxd" class="letterboxd-logo" />
+							<p>See my movie reviews and watchlist on Letterboxd</p>
+						</a>
+					</div>
+				)}
 			</div>
 		</section>
 	</div>
@@ -154,37 +144,40 @@ const recentPhotos = getRecentPhotos(3);
 
 <style>
 	.home-container {
-		max-width: 1000px;
+		max-width: 1200px;
 		margin: 0 auto;
 		padding-right: 250px; /* Accounting for sidebar */
 	}
 
-	/* Section Styling */
+	/* Section Styles */
 	.section {
-		margin-bottom: 4rem;
+		margin-bottom: 3rem;
+	}
+
+	.section-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1.5rem;
 	}
 
 	h2 {
-		font-size: 1.75rem;
-		margin-bottom: 1.5rem;
+		font-size: 1.8rem;
+		font-weight: 700;
 		color: var(--color-dark);
-		position: relative;
-		display: inline-block;
+		margin: 0;
 	}
 
-	h2::after {
-		content: '';
-		position: absolute;
-		bottom: -8px;
-		left: 0;
-		width: 40px;
-		height: 2px;
-		background-color: var(--color-medium-light);
+	.view-all {
+		color: var(--color-medium-dark);
+		text-decoration: none;
+		font-size: 0.9rem;
+		transition: color 0.2s ease, transform 0.2s ease;
 	}
 
-	.section-intro {
-		margin-bottom: 1.5rem;
-		color: var(--color-medium);
+	.view-all:hover {
+		color: var(--color-dark);
+		transform: translateX(3px);
 	}
 
 	/* Projects Section */
@@ -285,9 +278,8 @@ const recentPhotos = getRecentPhotos(3);
 	/* Photos Grid */
 	.photos-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		grid-template-columns: repeat(3, 1fr);
 		gap: 1.5rem;
-		margin-bottom: 1.5rem;
 	}
 
 	.photo-card {
@@ -348,10 +340,9 @@ const recentPhotos = getRecentPhotos(3);
 		display: flex;
 		flex-direction: column;
 		gap: 1.5rem;
-		margin-bottom: 1.5rem;
 	}
 
-	.post-card {
+	.post-item {
 		background-color: var(--card-background);
 		border-radius: 8px;
 		padding: 1.5rem;
@@ -359,34 +350,33 @@ const recentPhotos = getRecentPhotos(3);
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
 	}
 
-	.post-card:hover {
-		transform: translateY(-3px);
-		box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+	.post-item:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.post-meta {
+		margin-bottom: 0.5rem;
+	}
+
+	.post-date {
+		font-size: 0.85rem;
+		color: var(--color-medium);
 	}
 
 	.post-title {
 		margin: 0 0 0.75rem;
 		font-size: 1.3rem;
+	}
+
+	.post-title a {
 		color: var(--color-dark);
+		text-decoration: none;
+		transition: color 0.2s ease;
 	}
 
-	.post-meta {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.75rem;
-		margin-bottom: 1rem;
-		font-size: 0.85rem;
-	}
-
-	.post-date {
-		color: var(--color-medium);
-	}
-
-	.post-tag {
-		background-color: var(--color-lighter);
+	.post-title a:hover {
 		color: var(--color-medium-dark);
-		padding: 0.25rem 0.5rem;
-		border-radius: 4px;
 	}
 
 	.post-excerpt {
@@ -395,28 +385,25 @@ const recentPhotos = getRecentPhotos(3);
 		line-height: 1.6;
 	}
 
-	.read-more {
-		color: var(--color-medium-dark);
-		text-decoration: none;
-		font-size: 0.9rem;
-		font-weight: 500;
-		transition: color 0.2s ease;
+	.post-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
 	}
 
-	.read-more:hover {
-		color: var(--color-dark);
+	.tag {
+		background-color: var(--color-lighter);
+		color: var(--color-medium-dark);
+		font-size: 0.75rem;
+		padding: 0.25rem 0.75rem;
+		border-radius: 50px;
 	}
 
 	/* Letterboxd Section */
-	.letterboxd-section {
-		margin-bottom: 2rem;
-	}
-
 	.movies-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		grid-template-columns: repeat(3, 1fr);
 		gap: 1.5rem;
-		margin-bottom: 1.5rem;
 	}
 
 	.movie-card {
@@ -432,6 +419,12 @@ const recentPhotos = getRecentPhotos(3);
 		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 	}
 
+	.movie-link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+
 	.movie-poster {
 		overflow: hidden;
 		position: relative;
@@ -445,47 +438,79 @@ const recentPhotos = getRecentPhotos(3);
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.movie-card:hover .movie-poster img {
+		transform: scale(1.05);
+	}
+
+	.movie-poster-placeholder {
+		background-color: var(--color-lighter);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+	}
+
+	.movie-poster-placeholder span {
+		font-size: 2rem;
+		color: var(--color-medium);
 	}
 
 	.movie-info {
 		padding: 1rem;
 	}
 
-	.movie-info h3 {
+	.movie-title {
 		margin: 0 0 0.5rem;
-		font-size: 1rem;
+		font-size: 1.1rem;
 		color: var(--color-dark);
 	}
 
-	.movie-director {
+	.movie-meta {
 		font-size: 0.85rem;
 		color: var(--color-medium);
-		margin: 0 0 0.5rem;
+		margin-bottom: 0.5rem;
 	}
 
 	.movie-rating {
+		font-size: 1.2rem;
 		color: var(--color-medium-dark);
-		font-size: 0.9rem;
+		margin-bottom: 0.5rem;
 	}
 
-	/* View All Links */
-	.view-all {
-		text-align: right;
-		margin-top: 1rem;
+	.movie-date {
+		font-size: 0.85rem;
+		color: var(--color-medium);
+		margin: 0;
 	}
 
-	.view-all-link {
+	.letterboxd-empty {
+		background-color: var(--card-background);
+		border-radius: 8px;
+		padding: 2rem;
+		box-shadow: var(--card-shadow);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.letterboxd-link {
 		color: var(--color-medium-dark);
 		text-decoration: none;
-		font-size: 0.95rem;
-		font-weight: 500;
-		transition: color 0.2s ease, transform 0.2s ease;
-		display: inline-block;
+		transition: color 0.2s ease;
 	}
 
-	.view-all-link:hover {
+	.letterboxd-link:hover {
 		color: var(--color-dark);
-		transform: translateX(3px);
+	}
+
+	.letterboxd-logo {
+		width: 100px;
+		height: auto;
+		margin-bottom: 1rem;
 	}
 
 	/* Responsive Adjustments */
@@ -496,22 +521,37 @@ const recentPhotos = getRecentPhotos(3);
 	}
 
 	@media (max-width: 768px) {
+		h2 {
+			font-size: 1.5rem;
+		}
+
+		.photos-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
 		.project-card {
 			flex-direction: column;
 		}
 
 		.project-image {
 			min-height: 200px;
-			order: -1;
 		}
 
-		.photos-grid, .movies-grid {
-			grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+		.logo-container {
+			max-width: 100%;
+		}
+
+		.movies-grid {
+			grid-template-columns: repeat(2, 1fr);
 		}
 	}
 
 	@media (max-width: 480px) {
-		.photos-grid, .movies-grid {
+		.photos-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.movies-grid {
 			grid-template-columns: 1fr;
 		}
 	}
