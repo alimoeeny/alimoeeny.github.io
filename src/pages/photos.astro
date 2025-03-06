@@ -1,114 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { photos } from '../data/photos.js';
 ---
 
 <Layout>
-	<div class="photos-page-container">
-		<section class="page-header">
+	<div class="photos-container">
+		<header class="page-header">
 			<h1>Photography</h1>
-			<p class="subtitle">A collection of moments captured through my lens</p>
-		</section>
+			<p class="page-description">A collection of moments and thoughts captured in grayscale.</p>
+		</header>
 
-		<section class="photos-section">
-			<div class="photos-grid">
-				<!-- Row 1 -->
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?nature" alt="Nature photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>Morning Light</h3>
-						<p>March 2, 2025</p>
+		<div class="photos-grid">
+			{photos.map((photo) => (
+				<div class="photo-card">
+					<div class="photo-container">
+						<img src={photo.image} alt={photo.alt} class="grayscale" />
+					</div>
+					<div class="photo-info">
+						<h3>{photo.title}</h3>
+						<p class="photo-date">{photo.date}</p>
 					</div>
 				</div>
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?architecture" alt="Architecture photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>Urban Geometry</h3>
-						<p>February 28, 2025</p>
-					</div>
-				</div>
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?portrait" alt="Portrait photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>Contemplation</h3>
-						<p>February 25, 2025</p>
-					</div>
-				</div>
-				
-				<!-- Row 2 -->
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?street" alt="Street photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>City Rhythm</h3>
-						<p>February 20, 2025</p>
-					</div>
-				</div>
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?landscape" alt="Landscape photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>Horizon Lines</h3>
-						<p>February 15, 2025</p>
-					</div>
-				</div>
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?abstract" alt="Abstract photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>Patterns</h3>
-						<p>February 10, 2025</p>
-					</div>
-				</div>
-				
-				<!-- Row 3 -->
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?minimal" alt="Minimal photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>Negative Space</h3>
-						<p>February 5, 2025</p>
-					</div>
-				</div>
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?shadow" alt="Shadow photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>Light & Shadow</h3>
-						<p>January 30, 2025</p>
-					</div>
-				</div>
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?texture" alt="Texture photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>Textures</h3>
-						<p>January 25, 2025</p>
-					</div>
-				</div>
-				
-				<!-- Row 4 -->
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?macro" alt="Macro photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>Details</h3>
-						<p>January 20, 2025</p>
-					</div>
-				</div>
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?silhouette" alt="Silhouette photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>Silhouettes</h3>
-						<p>January 15, 2025</p>
-					</div>
-				</div>
-				<div class="photo-item">
-					<img src="https://source.unsplash.com/random/800x600?reflection" alt="Reflection photograph" class="grayscale" />
-					<div class="photo-overlay">
-						<h3>Reflections</h3>
-						<p>January 10, 2025</p>
-					</div>
-				</div>
-			</div>
-		</section>
+			))}
+		</div>
 	</div>
 </Layout>
 
 <style>
-	.photos-page-container {
+	.photos-container {
 		max-width: 1200px;
 		margin: 0 auto;
 		padding-right: 250px; /* Accounting for sidebar */
@@ -125,40 +44,49 @@ import Layout from '../layouts/Layout.astro';
 		color: var(--color-dark);
 	}
 
-	.subtitle {
-		font-size: 1.25rem;
+	.page-description {
+		font-size: 1.1rem;
 		color: var(--color-medium);
-		margin-bottom: 1.5rem;
 		max-width: 800px;
-	}
-
-	.photos-section {
-		margin-bottom: 4rem;
 	}
 
 	.photos-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		gap: 1.5rem;
+		margin-bottom: 3rem;
 	}
 
-	.photo-item {
-		position: relative;
-		overflow: hidden;
+	.photo-card {
+		background-color: var(--card-background);
 		border-radius: 8px;
+		overflow: hidden;
 		box-shadow: var(--card-shadow);
-		aspect-ratio: 4/3;
-		cursor: pointer;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
 	}
 
-	.photo-item img {
+	.photo-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.photo-container {
+		overflow: hidden;
+		position: relative;
+		padding-top: 66.67%; /* 3:2 aspect ratio */
+	}
+
+	.photo-container img {
+		position: absolute;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.5s ease;
+		transition: transform 0.3s ease;
 	}
 
-	.photo-item:hover img {
+	.photo-card:hover .photo-container img {
 		transform: scale(1.05);
 	}
 
@@ -166,38 +94,25 @@ import Layout from '../layouts/Layout.astro';
 		filter: grayscale(100%);
 	}
 
-	.photo-overlay {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
-		padding: 1.5rem;
-		color: var(--color-white);
-		opacity: 0;
-		transform: translateY(20px);
-		transition: opacity 0.3s ease, transform 0.3s ease;
+	.photo-info {
+		padding: 1rem;
 	}
 
-	.photo-item:hover .photo-overlay {
-		opacity: 1;
-		transform: translateY(0);
-	}
-
-	.photo-overlay h3 {
+	.photo-info h3 {
 		margin: 0 0 0.5rem;
-		font-size: 1.2rem;
+		font-size: 1.1rem;
+		color: var(--color-dark);
 	}
 
-	.photo-overlay p {
+	.photo-date {
+		font-size: 0.85rem;
+		color: var(--color-medium);
 		margin: 0;
-		font-size: 0.9rem;
-		opacity: 0.8;
 	}
 
 	/* Responsive Adjustments */
 	@media (max-width: 1024px) {
-		.photos-page-container {
+		.photos-container {
 			padding-right: 0;
 		}
 	}
@@ -205,10 +120,6 @@ import Layout from '../layouts/Layout.astro';
 	@media (max-width: 768px) {
 		h1 {
 			font-size: 2rem;
-		}
-
-		.subtitle {
-			font-size: 1.1rem;
 		}
 
 		.photos-grid {
