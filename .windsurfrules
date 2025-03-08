@@ -1,1 +1,3 @@
 1. please explain your plans and check with me first before making changes, then apply your changes.
+2. this repo is my personal website, built with astro and deployed on github pages.
+3. this repo used to use jekyll, and there are some remaining files and folders that you may need to remove.
