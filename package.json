@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "astro": "^5.4.2",
-    "fast-xml-parser": "^5.0.8"
+    "fast-xml-parser": "^5.0.8",
+    "three": "^0.176.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.176.0"
   }
 }
