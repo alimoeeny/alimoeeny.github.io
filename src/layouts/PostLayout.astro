@@ -18,11 +18,11 @@ const { frontmatter } = Astro.props;
 					</div>
 				</div>
 			</header>
-			
+
 			<div class="post-body">
 				<slot />
 			</div>
-			
+
 			<footer class="post-footer">
 				<div class="post-navigation">
 					<a href="/posts" class="back-to-posts">← Back to all posts</a>
@@ -105,25 +105,27 @@ const { frontmatter } = Astro.props;
 		color: var(--color-dark);
 	}
 
-	.post-body img {
+	.post-body :global(img) {
+		display: block;
 		max-width: 100%;
+		height: auto;
 		border-radius: 6px;
 		margin: 2rem 0;
 		filter: grayscale(100%);
 	}
 
-	.post-body a {
+	.post-body :global(a) {
 		color: var(--color-medium-dark);
 		text-decoration: underline;
 		text-underline-offset: 3px;
 		transition: color 0.2s ease;
 	}
 
-	.post-body a:hover {
+	.post-body :global(a:hover) {
 		color: var(--color-dark);
 	}
 
-	.post-body blockquote {
+	.post-body :global(blockquote) {
 		border-left: 4px solid var(--color-medium-light);
 		padding-left: 1.5rem;
 		margin-left: 0;
@@ -132,7 +134,7 @@ const { frontmatter } = Astro.props;
 		color: var(--color-medium);
 	}
 
-	.post-body code {
+	.post-body :global(code) {
 		background-color: var(--color-lighter);
 		padding: 0.2rem 0.4rem;
 		border-radius: 4px;
@@ -140,7 +142,7 @@ const { frontmatter } = Astro.props;
 		font-family: monospace;
 	}
 
-	.post-body pre {
+	.post-body :global(pre) {
 		background-color: var(--color-lighter);
 		padding: 1rem;
 		border-radius: 6px;
@@ -148,7 +150,7 @@ const { frontmatter } = Astro.props;
 		margin: 1.5rem 0;
 	}
 
-	.post-body pre code {
+	.post-body :global(pre code) {
 		background-color: transparent;
 		padding: 0;
 	}
