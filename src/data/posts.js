@@ -3,7 +3,14 @@
 // Each post has a title, date, formattedDate, slug, excerpt, and tags
 
 export const posts = [
-  // Posts will be added here
+  {
+    title: "There's a Better Way",
+    date: "2026-04-07",
+    formattedDate: "April 7, 2026",
+    slug: "happypathology-theres-a-better-way",
+    excerpt: "Most clinical labs still process fax and paper orders like it's 1996. HappyPathology is changing that.",
+    tags: ["Healthcare", "Labs", "Automation", "HappyPathology"],
+  },
 ];
 
 // Function to get the most recent posts (for homepage)

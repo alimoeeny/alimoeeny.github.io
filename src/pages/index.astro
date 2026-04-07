@@ -11,6 +11,26 @@ const recentMovies = await getRecentMovies(3);
 
 <Layout>
 	<div class="home-container">
+		<!-- Currently Working On Section -->
+		<section class="section featured-section">
+			<h2>Currently Working On</h2>
+			<a href="/posts/happypathology-theres-a-better-way" class="featured-card">
+				<div class="featured-content">
+					<p class="featured-label">HappyPathology &mdash; <span class="featured-link-text">happypathology.com</span></p>
+					<h3 class="featured-title">There's a Better Way</h3>
+					<p class="featured-body">
+						Most clinical labs still process fax and paper orders like it's 1996.
+						HappyPathology converts paper, fax, and PDFs into organized clinical data and routes it
+						to the systems your lab already uses. No re-entry. Already searchable.
+					</p>
+					<span class="featured-read-more">Read more &rarr;</span>
+				</div>
+				<div class="featured-image">
+					<img src="/images/theresabtterway.jpg" alt="There's a better way" />
+				</div>
+			</a>
+		</section>
+
 		<!-- Projects Section -->
 		<section class="section projects-section">
 			<h2>Projects</h2>
@@ -29,7 +49,7 @@ const recentMovies = await getRecentMovies(3);
 						<img src="/images/StringBeanLogo.png" alt="StringBean Radio Logo" class="logo-image" />
 					</div>
 				</div>
-				
+
 				<div class="project-card">
 					<div class="project-content">
 						<h3 class="project-title">Obsidian Dropbox Photo Grid</h3>
@@ -180,6 +200,88 @@ const recentMovies = await getRecentMovies(3);
 		transform: translateX(3px);
 	}
 
+	/* Featured Section */
+	.featured-section {
+		margin-top: 2rem;
+	}
+
+	.featured-card {
+		display: flex;
+		background-color: var(--card-background);
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: var(--card-shadow);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.featured-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+	}
+
+	.featured-content {
+		flex: 1;
+		padding: 2rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.featured-label {
+		font-size: 0.85rem;
+		color: var(--color-medium);
+		margin: 0 0 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.featured-link-text {
+		color: var(--color-medium-dark);
+	}
+
+	.featured-title {
+		font-size: 1.8rem;
+		margin: 0 0 1rem;
+		color: var(--color-dark);
+	}
+
+	.featured-body {
+		color: var(--color-medium-dark);
+		line-height: 1.7;
+		margin: 0 0 1.5rem;
+		flex-grow: 1;
+	}
+
+	.featured-read-more {
+		font-size: 0.9rem;
+		font-weight: 500;
+		color: var(--color-medium-dark);
+		margin-top: auto;
+	}
+
+	.featured-image {
+		flex: 1;
+		min-height: 280px;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.featured-image img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.featured-card:hover .featured-image img {
+		transform: scale(1.03);
+	}
+
 	/* Projects Section */
 	.projects-section {
 		margin-top: 2rem;
@@ -265,7 +367,7 @@ const recentMovies = await getRecentMovies(3);
 		height: 100%;
 		object-fit: cover;
 	}
-	
+
 	.logo-image {
 		position: relative !important;
 		max-width: 100%;
