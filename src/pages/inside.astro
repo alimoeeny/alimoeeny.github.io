@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <div id="game-container" style="width: 100%; height: 80vh; border: 1px solid #ccc;"></div>
+  <script>
+    import { initGame } from '../lib/inside-game.ts';
+
+    // Ensure the DOM is fully loaded before initializing the game
+    document.addEventListener('DOMContentLoaded', () => {
+      const gameContainer = document.getElementById('game-container');
+      if (gameContainer) {
+        // Clear placeholder content
+        // gameContainer.innerHTML = ''; // Optional: Keep title/text or clear it
+        initGame('game-container');
+      } else {
+        console.error('Failed to find the game container element on the page.');
+      }
+    });
+  </script>
+</Layout>
+
+<style>
+  #game-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  /* Additional styling for the game canvas can be added here or in a separate CSS file */
+</style>
